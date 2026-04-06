@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfólio | 10 Projetos</title>
+    <style>
+      /* ===================== STYLE.CSS ===================== */
+      body {
+        margin: 0;
+        font-family: Segoe UI;
+        background: #3d3d3d;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      #index-page {
+        background: #000 url("fundosite.png") center/cover fixed;
+      }
+
+      #portfolio-page {
+        background: url("fundoclaro.png") center/cover fixed;
+      }
+
+      #sobre-page {
+        background: url("fundoclaro.png") center/cover fixed;
+      }
+
+      #contato-page {
+        background: url("fundoclaro.png") center/cover fixed;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin: 20px 0 40px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .main-nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        padding: 0;
+      }
+
+      #index-page .main-nav {
+        padding: 10px 0;
+      }
+
+      #portfolio-page main,
+      #sobre-page main,
+      #contato-page main {
+        margin-top: 0;
+      }
+
+      .main-nav img {
+        width: 70px;
+        height: 70px;
+        transition:
+          transform 0.3s,
+          opacity 0.3s;
+      }
+
+      .main-nav img:hover {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+
+      .nav-bar {
+        background: linear-gradient(90deg, #190a0f 0%, #000000 100%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+      }
+
+      #index-page .nav-bar {
+        background: transparent;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+      }
+
+      #portfolio-page .nav-bar,
+      #sobre-page .nav-bar,
+      #contato-page .nav-bar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+      }
+
+      #portfolio-page main,
+      #sobre-page main,
+      #contato-page main {
+        margin-top: 100px;
+      }
+
+      .logo {
+        height: 80px;
+      }
+
+      .overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+      }
+
+      header {
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+      }
+
+      nav img {
+        width: 50px;
+        transition: 0.3s;
+      }
+
+      nav img:hover {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+
+      main {
+        flex: 1;
+        text-align: center;
+        margin-top: 5vh;
+        padding: 20px;
+      }
+
+      .projetos-container {
+        display: flex;
+        flex-direction: column;
+        gap: 200px;
+      }
+
+      .projeto-item {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .projeto-direita {
+        flex-direction: row-reverse !important;
+      }
+
+      .projeto-item img {
+        width: 40%;
+        max-width: 400px;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+      }
+
+      .image-stack {
+        position: relative;
+        flex: 0 0 40%;
+        max-width: 400px;
+      }
+
+      .image-stack img {
+        display: none;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+        transition: opacity 0.3s;
+      }
+
+      .image-stack img.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .indicators {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Adicionado para alinhar setas e bolinhas */
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .indicators span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #aaa;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .indicators span.active {
+        background: #fff;
+      }
+
+      /* --- INÍCIO DAS ADIÇÕES PARA AS SETAS NAS BOLINHAS --- */
+      .stack-arrow {
+        background: none;
+        border: none;
+        color: #aaa;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0 5px;
+        transition: color 0.3s;
+      }
+
+      .stack-arrow:hover {
+        color: #fff;
+      }
+      /* --- FIM DAS ADIÇÕES --- */
+
+      .projeto-item .text {
+        flex: 1;
+      }
+
+      .projeto-direita .text {
+        text-align: right;
+      }
+
+      .projeto-item h3 {
+        text-align: left;
+        margin: 0 0 15px 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .projeto-direita h3 {
+        text-align: right;
+      }
+
+      .projeto-item p {
+        text-align: left;
+        color: #aaa;
+        line-height: 1.8;
+      }
+
+      .projeto-direita .text p {
+        text-align: right;
+      }
+
+      .separador {
+        width: 40px;
+        height: 2px;
+        background-color: #333;
+        margin: 0 auto;
+      }
+
+      h2 {
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .perfil {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 400px;
+        margin: auto;
+      }
+
+      input,
+      textarea {
+        background: #111;
+        border: 1px solid #222;
+        padding: 10px;
+        color: #fff;
+      }
+
+      button {
+        padding: 12px;
+        background: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      footer {
+        padding: 40px;
+        text-align: center;
+        color: #444;
+        border-top: 1px solid #111;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* --- INÍCIO DAS ADIÇÕES DO MODAL CENTRALIZADO E MENOR --- */
+      .modal-content-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px; /* Espaçamento entre as setas e a imagem */
+        width: 100%;
+        height: 100%;
+      }
+
+      .modal img {
+        max-width: 70%; /* Diminuído de 90% para 60% */
+        max-height: 70%; /* Diminuído de 90% para 60% */
+        object-fit: contain;
+      }
+
+      .nav-arrow {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .nav-arrow:hover {
+        color: #bbb;
+      }
+      /* --- FIM DAS ADIÇÕES --- */
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: #bbb;
+      }
+    </style>
+  </head>
+  <body id="portfolio-page">
+    <div class="overlay"></div>
+
+    <div class="nav-bar">
+      <img class="logo" src="logo.png" alt="Logo" />
+      <nav class="main-nav">
+        <a href="index.html"><img src="home.png" /></a>
+        <a href="portfolio.html"><img src="portfolio.png" /></a>
+        <a href="sobre.html"><img src="user.png" /></a>
+        <a href="contato.html"><img src="mail.png" /></a>
+      </nav>
+    </div>
+
+    <main>
+      <h2 class="page-title">Meus Trabalhos</h2>
+
+      <div class="separador"></div>
+      <br />
+      <div class="projetos-container">
+        <div class="projeto-item">
+          <div class="image-stack">
+            <img src="projetos/branco com fundo.png" class="active" />
+            <img src="logopreto.png"/>
+            <img src="Captura de tela 2026-04-05 162311.png" />
+            
+            <img src="paleta.png" />
+            <img src="esboço.png" />
+            <div class="indicators">
+              <button class="stack-arrow prev-stack">&#10094;</button>
+              <span data-index="0" class="active"></span>
+              <span data-index="1"></span>
+              <span data-index="2"></span>
+              <span data-index="3"></span>
+              <span data-index="4"></span>
+              
+              <button class="stack-arrow next-stack">&#10095;</button>
+            </div>
+          </div>
+          <div class="text">
+            <h3>Yujidō — Identidade Visual</h3>
+            <p>
+              <b>YUJIDŌ</b> nasce da união entre tradição e identidade.
+              Inspirada nos carimbos japoneses e no símbolo <b>ensō</b>, a marca
+              representa fluxo, disciplina e expressão autêntica. A forma
+              circular remete ao movimento contínuo da criação, enquanto seu
+              centro sugere um olhar — percepção, intenção e consciência no
+              processo criativo.<br />
+              O desenvolvimento partiu de esboços <b>manuais</b>, utilizando da
+              ferramenta "Paint" (como mostra a imagem 5), explorando formas
+              orgânicas e imperfeições naturais do traço, buscando capturar a
+              espontaneidade do gesto. A partir disso, o símbolo foi refinado
+              digitalmente, equilibrando expressividade e precisão.<br />
+              A paleta de cores(Imagem 4) foi definida para reforçar essa
+              identidade. O preto (#1a1a1a) cria uma base sólida, elegante e
+              atemporal, enquanto o vermelho (#bf0d37) introduz contraste e
+              intensidade. O vermelho simboliza <b>energia, impacto e ação</b> —
+              elementos que traduzem a <b>força</b> e a <b>presença</b> da
+              marca. <br />O nome carrega esse mesmo significado:
+              <b>Yuji</b> pode ser associado à força, determinação e energia,
+              enquanto dō (<b>道</b>) representa <b>“o caminho”</b> — uma
+              jornada de aprimoramento constante. Assim, <b>YUJIDŌ</b> se define
+              como o caminho do design guiado por
+              <b>precisão, propósito e visão</b>.
+            </p>
+          </div>
+        </div>
+        <div class="separador"></div>
+
+        <div class="projeto-item projeto-direita">
+          <div class="image-stack">
+            <img src="leblanc/Leblanc logo 2.png" class="active" />
+            <img src="leblanc/Captura de tela 2026-04-05 160815.png" />
+            <img src="leblanc/Captura de tela 2026-04-05 143146.png" />
+            <img src="leblanc/Mockup menu feito.png" alt="">
+            
+            <img src="projetos/espresso (1).png" alt="">
+            <div class="indicators">
+              <button class="stack-arrow prev-stack">&#10094;</button>
+              <span data-index="0" class="active"></span>
+              <span data-index="1"></span>
+              <span data-index="2"></span>
+                <span data-index="3"></span>
+                <span data-index="4"></span>
+                
+              <button class="stack-arrow next-stack">&#10095;</button>
+            </div>
+          </div>
+          <div class="text">
+        <h3>Leblanc Jazz Café — Branding</h3>
+            <p>
+              A identidade visual do <b>Leblanc Jazz Café</b> foi desenvolvida com uma
+              abordagem sofisticada e temática, buscando traduzir a atmosfera
+              acolhedora e artística de um café inspirado no universo do <b>jazz</b>. A
+              composição equilibra elegância e personalidade, criando uma marca
+              que remete tanto ao conforto de uma cafeteria quanto à
+              expressividade musical.<br> O processo iniciou com esboços voltados à
+              construção do símbolo e da tipografia, explorando formas que
+              conectassem música e identidade visual. A ideia central foi
+              integrar o conceito de <b>jazz</b> de maneira sutil e criativa,
+              resultando na fusão do “J” com a forma de um saxofone. O gato foi
+              incorporado como elemento principal da marca, trazendo carisma e
+              reforçando uma identidade única e memorável. <br>A paleta de cores foi
+              escolhida para reforçar essa atmosfera. O tom de creme cria uma
+              base suave e acolhedora, enquanto o vermelho velvet adiciona
+              profundidade e sofisticação. O preto complementa a composição,
+              trazendo contraste e elegância, além de remeter ao ambiente
+              intimista típico de casas de jazz. <br>Assim, o projeto se define como
+              uma identidade visual que une música, conforto e estilo, criando
+              uma experiência visual que reflete o espírito envolvente do
+              jazz.
+            </p>
+          </div>
+        </div>
+        <div class="separador"></div>
+
+        <div class="projeto-item">
+          <div class="image-stack">
+            <img src="lemonsoda/lemonsoda.jpeg" class="active" />
+            <img src="lemonsoda/lemon soda poster.png" />
+            <img src="lemonsoda/image.png" alt="">
+            <div class="indicators">
+              <button class="stack-arrow prev-stack">&#10094;</button>
+              <span data-index="0" class="active"></span>
+              <span data-index="1"></span>
+              <span data-index="2"></span>
+              <button class="stack-arrow next-stack">&#10095;</button>
+            </div>
+          </div>
+          <div class="text">
+            <h3>Lemon Soda — Visual Concept</h3>
+            <p>
+              A capa foi desenvolvida com uma abordagem conceitual, buscando
+              traduzir visualmente a atmosfera da música. A composição combina
+              elementos gráficos e orgânicos de forma expressiva, criando uma
+              estética que mistura emoção e abstração. A sobreposição de formas
+              e texturas reforça a complexidade do sentimento transmitido,
+              resultando em uma peça visual intensa e interpretativa. O processo
+              teve início com esboços focados na ideia central de dualidade
+              emocional. A partir disso, foram exploradas diferentes formas de
+              representar contraste entre estados de espírito, até chegar a uma
+              composição que equilibrasse impacto visual e leitura conceitual. O
+              refinamento digital trouxe coesão entre os elementos, ajustando
+              cores, camadas e transições. A escolha das cores desempenha um
+              papel essencial na narrativa. O uso do azul sobre o rosto
+              associado à felicidade cria um contraste intencional, sugerindo
+              uma emoção reprimida ou melancolia por trás de uma aparência
+              positiva. Já o rosto triste, mantido em suas cores naturais, ganha
+              destaque e reforça a autenticidade do sentimento, trazendo a dor
+              para o primeiro plano. Essa inversão visual constrói uma leitura
+              mais profunda da obra, onde a emoção não é apenas representada,
+              mas questionada. Assim, o projeto se define como uma interpretação
+              visual sensível e simbólica, capaz de traduzir a intensidade e a
+              complexidade de uma música mais introspectiva.
+            </p>
+          </div>
+        </div>
+        <div class="separador"></div>
+
+        <div class="projeto-item projeto-direita">
+          <div class="image-stack">
+            <img src="posters/poster street 1, choso.png" class="active" />
+            <img src="posters/image.png" alt="">
+            <img src="posters/poster street 2, shibuya punk.png" />
+            <img src="posters/shibuya/image.png" alt="">
+            <div class="indicators">
+              <button class="stack-arrow prev-stack">&#10094;</button>
+              <span data-index="0" class="active"></span>
+              <span data-index="1"></span>
+              <span data-index="2"></span>
+                <span data-index="3"></span>
+              <button class="stack-arrow next-stack">&#10095;</button>
+            </div>
+          </div>
+          <div class="text">
+            <h3>
+              Yujidō Street Series — Posters - Exposição de Arte Urbana
+            </h3>
+            <p>
+              Os pôsteres da Yujidō Street Series foram desenvolvidos com uma abordagem experimental, buscando traduzir visualmente uma estética urbana crua e expressiva. A composição combina tipografia, texturas e elementos gráficos de forma intensa, criando peças que remetem à linguagem visual das ruas. O uso de sobreposição, ruído e distorções constrói uma identidade marcada pelo caos controlado, resultando em uma estética impactante e contemporânea.
+
+O processo teve início com explorações visuais rápidas, focadas na criação de composições diretas e de alto impacto. A partir disso, foram testadas diferentes abordagens tipográficas e variações de layout, buscando equilíbrio entre legibilidade e expressão. O refinamento digital trouxe coesão ao conjunto, ajustando contraste, ritmo visual e aplicação de texturas.
+
+A escolha dos elementos visuais desempenha papel essencial na construção da série. O uso de tipografia forte, cortes abruptos e interferências gráficas reforça a ideia de ruptura e experimentação, enquanto as texturas simulam desgaste e imperfeição, aproximando os pôsteres do contexto urbano real. Assim, o projeto se define como uma exploração visual que une estética street e identidade autoral, criando peças que comunicam impacto e atitude.
+            </p>
+          </div>
+        </div>
+        <div class="separador"></div>
+
+        <div class="projeto-item">
+          <div class="image-stack">
+            <img src="data magna.png" class="active" />
+            <img src="projetos/Dias comemorativos/datamoc.png" alt="">
+            <img src="mulher.png" />
+            <img src="projetos/image.png" alt="">
+            <img src="projetos/Dias comemorativos/autismo.png" alt="">
+            <img src="projetos/Dias comemorativos/autismomoc.png" alt="">
+            <div class="indicators">
+              <button class="stack-arrow prev-stack">&#10094;</button>
+              <span data-index="0" class="active"></span>
+              <span data-index="1"></span>
+              <span data-index="2"></span>
+              <span data-index="3"></span>
+              <span data-index="4"></span>
+              <span data-index="5"></span>
+              <button class="stack-arrow next-stack">&#10095;</button>
+            </div>
+          </div>
+          <div class="text">
+            <h3>Projetos Sociais — Campanhas</h3>
+            <p>
+              Os projetos sociais foram desenvolvidos com foco em comunicação clara e impacto visual, buscando traduzir temas relevantes por meio de uma linguagem acessível e direta. Inspirados em composições editoriais e publicitárias, os layouts utilizam hierarquia tipográfica e contraste para guiar o olhar e reforçar a mensagem principal, equilibrando informação e estética.
+
+O processo teve início com esboços voltados à organização dos elementos e à construção de uma leitura eficiente. Cada peça foi pensada para destacar seu tema de forma objetiva, explorando diferentes formas de transmitir a mensagem com clareza. O refinamento digital trouxe consistência visual, ajustando alinhamentos, proporções e contraste.
+
+A escolha das cores e dos elementos simbólicos desempenha papel fundamental em cada projeto, reforçando o significado de cada tema abordado. O uso de paletas específicas e elementos visuais reconhecíveis contribui para a identificação imediata das campanhas, enquanto a composição busca gerar conexão e empatia com o público.
+
+Assim, os projetos se definem como peças de comunicação visual que unem propósito e estética, utilizando o design como ferramenta para informar, sensibilizar e gerar impacto.
+            </p>
+          </div>
+        </div>
+        <div class="separador"></div>
+
+  
+    </main>
+
+    <div id="image-modal" class="modal">
+      <div class="modal-content-wrapper">
+        <span class="close">&times;</span>
+        <button class="nav-arrow prev-arrow">&#10094;</button>
+        <img id="modal-img" src="" alt="Imagem ampliada" />
+        <button class="nav-arrow next-arrow">&#10095;</button>
+      </div>
+    </div>
+
+    <footer>
+     <p>&copy; Yujido - 2026</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const stacks = document.querySelectorAll(".image-stack");
+        const modal = document.getElementById("image-modal");
+        const modalImg = document.getElementById("modal-img");
+        const closeBtn = document.querySelector(".close");
+        const prevBtn = document.querySelector(".prev-arrow");
+        const nextBtn = document.querySelector(".next-arrow");
+
+        let currentImages = [];
+        let currentIndex = 0;
+
+        stacks.forEach((stack) => {
+          const images = stack.querySelectorAll("img");
+          const indicators = stack.querySelectorAll(".indicators span");
+
+          // --- INÍCIO DA ADIÇÃO (Controle para as setas na própria imagem) ---
+          const prevStackBtn = stack.querySelector(".prev-stack");
+          const nextStackBtn = stack.querySelector(".next-stack");
+          let currentImgIndex = 0;
+          // --- FIM DA ADIÇÃO ---
+
+          function showImage(index) {
+            images.forEach((img) => img.classList.remove("active"));
+            indicators.forEach((ind) => ind.classList.remove("active"));
+            images[index].classList.add("active");
+            indicators[index].classList.add("active");
+            currentImgIndex = index; // Adicionado para manter o controle sincronizado
+          }
+
+          indicators.forEach((indicator, index) => {
+            indicator.addEventListener("click", (e) => {
+              e.stopPropagation();
+              showImage(index);
+            });
+          });
+
+          // --- INÍCIO DA ADIÇÃO (Eventos de clique das setinhas ao lado das bolinhas) ---
+          if (prevStackBtn && nextStackBtn) {
+            prevStackBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              let newIndex =
+                currentImgIndex === 0 ? images.length - 1 : currentImgIndex - 1;
+              showImage(newIndex);
+            });
+
+            nextStackBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              let newIndex =
+                currentImgIndex === images.length - 1 ? 0 : currentImgIndex + 1;
+              showImage(newIndex);
+            });
+          }
+          // --- FIM DA ADIÇÃO ---
+
+          images.forEach((img, index) => {
+            img.addEventListener("click", () => {
+              currentImages = Array.from(images);
+              currentIndex = index;
+              updateModal();
+              modal.style.display = "flex"; // Usando flex para centralizar
+            });
+          });
+        });
+
+        function updateModal() {
+          modalImg.src = currentImages[currentIndex].src;
+        }
+
+        prevBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentIndex =
+            currentIndex === 0 ? currentImages.length - 1 : currentIndex - 1;
+          updateModal();
+        });
+
+        nextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentIndex =
+            currentIndex === currentImages.length - 1 ? 0 : currentIndex + 1;
+          updateModal();
+        });
+
+        closeBtn.addEventListener(
+          "click",
+          () => (modal.style.display = "none"),
+        );
+        modal.addEventListener("click", (e) => {
+          if (
+            e.target === modal ||
+            e.target.classList.contains("modal-content-wrapper")
+          ) {
+            modal.style.display = "none";
+          }
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (
+            modal.style.display === "flex" ||
+            modal.style.display === "block"
+          ) {
+            if (e.key === "ArrowLeft") prevBtn.click();
+            if (e.key === "ArrowRight") nextBtn.click();
+            if (e.key === "Escape") modal.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

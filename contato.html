@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    /* Centraliza apenas o título principal */
+    main h2 {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    /* Mantém o container de conteúdo alinhado à esquerda */
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+        padding-left: 20px;
+    }
+
+    .contato-item {
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+    .contato-item p {
+        margin: 0 0 8px 0;
+        font-weight: bold;
+    }
+
+    /* Links brancos e sem sublinhado */
+    main a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.1rem;
+    }
+
+    main a:hover {
+        opacity: 0.8;
+    }
+
+    main i {
+        font-size: 1.6rem;
+    }
+</style>
+</head>
+<body id="contato-page">
+<div class="overlay"></div>
+<div class="nav-bar">
+<img class="logo" src="logo.png" alt="Logo">
+<nav class="main-nav">
+<a href="index.html"><img src="home.png"></a>
+<a href="portfolio.html"><img src="portfolio.png"></a>
+<a href="sobre.html"><img src="user.png"></a>
+<a href="contato.html"><img src="mail.png"></a>
+</nav>
+</div>
+<main>
+<h2>Contato</h2>
+
+<div class="contato-item">
+    <p>Instagram</p>
+    <a href="https://instagram.com/yujido.ds" target="_blank">
+        <i class="fab fa-instagram"></i> @yujido.ds
+    </a>
+</div>
+
+<div class="contato-item">
+    <p>Email profissional</p>
+    <a href="mailto:Miguelborges0310@gmail.com">
+        <i class="fas fa-envelope"></i> Miguelborges0310@gmail.com
+    </a>
+</div>
+</main>
+<footer>
+<p>&copy; Yujido - 2026</p>
+</footer>
+</body>
+</html>
